@@ -4,9 +4,127 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework16"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
         
+        mc:Ignorable="d"
+        Title='Магазин бытовой техники "М-Аудио"' Height="800" Width="1400" 
+        ResizeMode="NoResize"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}">
+
+
+
+    <!--<Grid>
+        <materialDesign:Card Padding="32" Margin="16">
+            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">My First Material Design App</TextBlock>
+        </materialDesign:Card>
+    </Grid>-->
+
+
+
+
+    <Grid   >
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.65*" />
+        </Grid.ColumnDefinitions>
+
+        <DataGrid ToolTip="Правая кнопка мыши для контекстного меню" Name="dgSQL" Margin="10,50,10,10"
+                  
+                  Grid.Column="0" Grid.Row="0"
+                  IsSynchronizedWithCurrentItem="True"
+                  SelectionMode="Single" 
+                  AutoGenerateColumns="False" 
+                  ItemsSource="{Binding}"
+                  IsReadOnly="False" 
+                  
+                  
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="id" 
+                                    Binding="{Binding Id}" 
+                                    Header="Id" 
+                                    IsReadOnly="True"
+                                    Width="66"
+                                    />
+
+                <DataGridTextColumn x:Name="email" 
+                                    Binding="{Binding Email}" 
+                                    IsReadOnly="True"
+                                    Header="E-mail"
+                                    Width="200"/>
+
+                <DataGridTextColumn x:Name="lastNAme" 
+                                    Binding="{Binding LastName}" 
+                                    Header="Фамилия"/>
+
+                <DataGridTextColumn x:Name="firstName" 
+                                    Binding="{Binding FirstName}" 
+                                    Header="Имя"/>
+                <DataGridTextColumn x:Name="surName" 
+                                    Binding="{Binding SurName}" 
+                                    Header="Отчество"/>
+                <DataGridTextColumn x:Name="phone" 
+                                    Binding="{Binding Phone}" 
+                                    Header="Номер телефона"
+                                    Width="150"/>
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить" Click="MenuItemAddClick"/>
+                    <MenuItem Header="Удалить" Click="MenuItemDeleteClick"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+
+
+        </DataGrid>
+
+        <DataGrid Grid.Column="1" Grid.Row="0" Name="dgAccess" Margin="10,50,10,10"
+                  IsSynchronizedWithCurrentItem="True"
+                  IsReadOnly="True"
+                  SelectionMode="Single" 
+                  AutoGenerateColumns="False" 
+                  ItemsSource="{Binding}" 
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="productId" 
+                                    Binding="{Binding Id}" 
+                                    Header="Id" 
+                                    />
+
+                <DataGridTextColumn x:Name="emailProduct" 
+                                    Binding="{Binding E-mail}" 
+                                    Header="E-mail покупателя"
+                                    Width="200"/>
+
+                <DataGridTextColumn x:Name="productCode" 
+                                    Binding="{Binding ProductCode}" 
+                                    Header="Код товара"
+                                    Width="65"/>
+
+                <DataGridTextColumn x:Name="productName" 
+                                    Binding="{Binding ProductName}" 
+                                    Header="Наименование товара"
+                                    Width="200"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="2" Grid.Row="0" Content="Добавить покупку" Margin="0,313,0,0" VerticalAlignment="Top" Width="270" Height="32" Click="AddPurchaseBtnClick" HorizontalAlignment="Center"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Удалить покупку" HorizontalAlignment="Center" Margin="0,392,0,0" VerticalAlignment="Top"  Height="32" Width="270" Click="DelPurchaseBtnClick"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Удалить все покупки покупателя" HorizontalAlignment="Center" Margin="0,508,0,0" VerticalAlignment="Top" Height="32" Width="270" Click="DelAllPurchaseBtnClick"/>
+        <Button Grid.Column="2" Grid.Row="0" Name="btnAddCustomer" Content="Добавить покупателя" Margin="0,613,0,0" VerticalAlignment="Top" Width="270" Height="32" Click="addCustomerBtnClick" HorizontalAlignment="Center"/>
+        <Button Grid.Column="2" Content="Посмотреть покупки всех клиентов" HorizontalAlignment="Center" Width="270" Click="allPurchaseBtnClick" Margin="0,0,0,40" Height="32" VerticalAlignment="Bottom" />
+        <TextBlock Grid.Column="2"  Name="tbInfo" HorizontalAlignment="Center" Margin="0,61,0,562" TextWrapping="Wrap" TextAlignment="Center" Text="Поле для вывода ошибок." Width="270"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0"  TextWrapping="Wrap" Text="Клиенты" FontSize="15" FontWeight="Bold" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Покупки" FontSize="15" FontWeight="Bold" VerticalAlignment="Top"  Grid.Column="1"/>
+
+
     </Grid>
 </Window>

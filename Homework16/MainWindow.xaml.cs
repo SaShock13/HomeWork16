@@ -57,6 +57,71 @@ namespace Homework16
         public MainWindow()
         {
             InitializeComponent();
+
+
+            DbConnector connector = new DbConnector();
+            dgSQL.ItemsSource = connector.sqlDataTable.DefaultView;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAddCustomerClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Delete_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteAll_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemAddClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemDeleteClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addCustomerBtnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddPurchaseBtnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void allPurchaseBtnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DelAllPurchaseBtnClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DelPurchaseBtnClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
