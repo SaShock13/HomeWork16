@@ -100,17 +100,17 @@
                                     />
 
                 <DataGridTextColumn x:Name="emailProduct" 
-                                    Binding="{Binding E-mail}" 
+                                    Binding="{Binding Email}" 
                                     Header="E-mail покупателя"
                                     Width="200"/>
 
                 <DataGridTextColumn x:Name="productCode" 
-                                    Binding="{Binding ProductCode}" 
+                                    Binding="{Binding Code}" 
                                     Header="Код товара"
                                     Width="65"/>
 
                 <DataGridTextColumn x:Name="productName" 
-                                    Binding="{Binding ProductName}" 
+                                    Binding="{Binding Name}" 
                                     Header="Наименование товара"
                                     Width="200"/>
 
