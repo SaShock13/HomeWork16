@@ -50,19 +50,19 @@ namespace Homework16
 
                 var sql = "select * from Customerz";
 
-                SqlCommand command = new SqlCommand(sql, mySQLConnection);
+                //SqlCommand command = new SqlCommand(sql, mySQLConnection);
 
-                mySQLConnection.Open();
-                MessageBox.Show(mySQLConnection.State.ToString());
-                command.ExecuteNonQuery();
-                mySQLConnection.Close();
+                //mySQLConnection.Open();
+                //MessageBox.Show(mySQLConnection.State.ToString());
+                //command.ExecuteNonQuery();
+                //mySQLConnection.Close();
 
 
                 sqlDataTable = new DataTable();
                 sqlDA = new SqlDataAdapter();
 
 
-                sql = @"SELECT * FROM [Customerz] Order By [Email]";
+                sql = @"SELECT * FROM Customerz Order By Email";
                 sqlDA.SelectCommand = new SqlCommand(sql, mySQLConnection);
 
                 sqlDA.Fill(sqlDataTable);
