@@ -24,3 +24,5 @@ C:\Skillbox\MyHomeworks\Homework16\Homework16\bin\Debug\Microsoft.Xaml.Behaviors
 C:\Skillbox\MyHomeworks\Homework16\Homework16\bin\Debug\Microsoft.Xaml.Behaviors.xml
 C:\Skillbox\MyHomeworks\Homework16\Homework16\obj\Debug\App.baml
 C:\Skillbox\MyHomeworks\Homework16\Homework16\obj\Debug\Homework16.csproj.CopyComplete
+C:\Skillbox\MyHomeworks\Homework16\Homework16\obj\Debug\AddPurchaseWindow.g.cs
+C:\Skillbox\MyHomeworks\Homework16\Homework16\obj\Debug\AddPurchaseWindow.baml

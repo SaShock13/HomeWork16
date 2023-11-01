@@ -122,49 +122,47 @@ namespace Homework16
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void btnAddCustomerClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Delete_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DeleteAll_Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MenuItemAddClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MenuItemDeleteClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        
         private void addCustomerBtnClick(object sender, RoutedEventArgs e)
         {
+            DataRow customerDataRow = connector.sqlDataTable.NewRow();
+            customerDataRow["LastName"]= "Булкин";
+            customerDataRow["SurName"] = "Булкин";
+            customerDataRow["FirstName"] = "Булкин";
+            customerDataRow["Phone"] = 134679;
+            customerDataRow["Email"] = "bulkin@gmail.com";
+            connector.sqlDataTable.Rows.Add(customerDataRow);
+            
+            connector.SqlUpdate();
 
         }
 
         private void AddPurchaseBtnClick(object sender, RoutedEventArgs e)
         {
+            
+            DataRowView customerDataRowView;
+            DataRow purchaseDataRow = connector.oleDataTable.NewRow();
+            customerDataRowView = dgSQL.SelectedItem as DataRowView;
+            
+            AddPurchaseWindow addPurchaseWindow = new AddPurchaseWindow(purchaseDataRow);
+            if (dgSQL.SelectedIndex!=-1)
+            {
+                addPurchaseWindow.ShowDialog();
 
+
+                if (addPurchaseWindow.DialogResult == true)
+                {
+                    purchaseDataRow = addPurchaseWindow.purchaseRow;
+                    purchaseDataRow["Email"] = customerDataRowView["Email"];
+
+                    connector.oleDataTable.Rows.Add(purchaseDataRow); //Добавляет покупку в DataTable
+                    MessageBox.Show(purchaseDataRow["Id"].ToString());
+                    connector.AccessUpdate();
+                    dgAccess.ItemsSource = connector.oleDataTable.DefaultView;
+
+
+                }
+            }
         }
 
         private void allPurchaseBtnClick(object sender, RoutedEventArgs e)
@@ -184,6 +182,17 @@ namespace Homework16
             dataRowView = (DataRowView)dgAccess.SelectedItem;
             dataRowView.Row.Delete();
             connector.AccessUpdate();
+
+        }
+
+        private void MenuItemAddClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemDeleteClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

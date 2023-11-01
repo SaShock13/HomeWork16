@@ -20,7 +20,8 @@ namespace Homework16
         public OleDbDataAdapter oleDataAdapter;
         public DataTable sqlDataTable;
         public DataTable oleDataTable;
-        DataRowView dataRowView;
+
+        //DataRowView dataRowView;
         public DbConnector()
         {
             MSSQLInitiation();
@@ -37,26 +38,10 @@ namespace Homework16
                 InitialCatalog = "Homework16SQLDB"
             };
 
-            try
-            {
+            
                 mySQLConnection = new SqlConnection(strBuilderConString.ConnectionString);
-                //var sql = @"INSERT INTO Customerz ([LastName],[FirstName],[SurName],[Email],[Phone]) VALUES 
-                //(N'Смирнова', N'Екатерина', N'Алексеевна', 'ekaterina_smirnova @example.com',792345),
-                //(N'Кузнецов', N'Максим', N'Андреевич', 'maxim_kuznetsov @example.com',793456),
-                //(N'Попова', N'Ольга', N'Дмитриевна', 'olga_popova @example.com',794567),
-                //(N'Васильев', N'Иван', N'Егорович', 'ivan_vasilyev @example.com',795678)
-                //";
-
-
+                
                 var sql = "select * from Customerz";
-
-                //SqlCommand command = new SqlCommand(sql, mySQLConnection);
-
-                //mySQLConnection.Open();
-                //MessageBox.Show(mySQLConnection.State.ToString());
-                //command.ExecuteNonQuery();
-                //mySQLConnection.Close();
-
 
                 sqlDataTable = new DataTable();
                 sqlDA = new SqlDataAdapter();
@@ -65,7 +50,28 @@ namespace Homework16
                 sql = @"SELECT * FROM Customerz Order By Email";
                 sqlDA.SelectCommand = new SqlCommand(sql, mySQLConnection);
 
+                
+                sql = @"INSERT INTO Customerz (LastName,  FirstName,  SurName,Phone,Email) 
+                                 VALUES (@LastName, @FirstName, @SurName,@Phone,@Email); 
+                     SET @id = @@IDENTITY;";
+
+                sqlDA.InsertCommand = new SqlCommand(sql, mySQLConnection);
+
+                sqlDA.InsertCommand.Parameters.Add("@id", SqlDbType.Int, 4, "id").Direction = ParameterDirection.Output;
+                sqlDA.InsertCommand.Parameters.Add("@LastName", SqlDbType.NVarChar, 20, "LastName");
+                sqlDA.InsertCommand.Parameters.Add("@FirstName", SqlDbType.NVarChar, 20, "FirstName");
+                sqlDA.InsertCommand.Parameters.Add("@SurName", SqlDbType.NVarChar, 20, "SurName");
+                sqlDA.InsertCommand.Parameters.Add("@Phone", SqlDbType.Int, 11, "Phone");
+                sqlDA.InsertCommand.Parameters.Add("@Email", SqlDbType.NVarChar, 50, "Email");
+
+            //sql = "";
+            //sqlDA.UpdateCommand = new SqlCommand()
+
+
+            try
+            {
                 sqlDA.Fill(sqlDataTable);
+
 
             }
             catch (Exception e)
@@ -84,7 +90,7 @@ namespace Homework16
         {
             oleDataTable = new DataTable();
             oleDataAdapter = new OleDbDataAdapter();
-
+            
             var oleStrBuilder = new OleDbConnectionStringBuilder()
             {
                 Provider = "Microsoft.ACE.OLEDB.12.0",
@@ -103,44 +109,20 @@ namespace Homework16
             oleDataAdapter.DeleteCommand = new OleDbCommand(sql, oleConnection);
             oleDataAdapter.DeleteCommand.Parameters.Add("@id", OleDbType.Integer, 4, "id");
 
+            sql = @"INSERT INTO Purchases (Email,Code,Name) 
+                                 VALUES (@email,@Code,@Name);
+                                    ";
 
+            oleDataAdapter.InsertCommand = new OleDbCommand(sql, oleConnection);
+
+            //oleDataAdapter.InsertCommand.Parameters.Add("@id", OleDbType.Integer, 4, "Id").Direction = ParameterDirection.Output; 
+            oleDataAdapter.InsertCommand.Parameters.Add("@email", OleDbType.WChar, 50, "Email");
+            oleDataAdapter.InsertCommand.Parameters.Add("@Code", OleDbType.WChar, 20, "Code");
+            oleDataAdapter.InsertCommand.Parameters.Add("@Name", OleDbType.WChar, 50, "Name");
 
 
             try
             {
-
-                #region запросы
-                //sql = "DROP TABLE Purchases";
-                //sql = @"CREATE TABLE Purchases (Id INT IDENTITY PRIMARY KEY,Email VARCHAR(30) not null,Name VARCHAR(50) not null,Code INT not null)";
-                //sql = "INSERT INTO Purchases (Email, Name, Code) VALUES ('ivan_vasilyev @example.com', 'Холодильник ''Морозко''',123456)";
-
-                //sql = "INSERT INTO Purchases (Email, Name, Code) VALUES ('ivan_vasilyev@example.com', 'Холодильник ''Морозко''',123456)";
-                //sql = "INSERT INTO Purchases(Email, Name, Code) VALUES('alex_ivanov@example.com', 'Стиральная машина ''Белоснежка''', 234567)";
-                //sql = "INSERT INTO Purchases(Email, Name, Code) VALUES('ekaterina_smirnova@example.com', 'Пылесос ''Чистый дом''', 345678)";
-                //sql = "INSERT INTO Purchases(Email, Name, Code) VALUES('maxim_kuznetsov@example.com', 'Микроволновая печь ''Мгновенный обед''', 456789)";
-                //sql = "INSERT INTO Purchases(Email, Name, Code) VALUES('olga_popova@example.com', 'Телевизор ''Кристалл''', 567890)";
-                //sql = "INSERT INTO Purchases(Email, Name, Code) VALUES('ekaterina_smirnova@example.com', 'Кофемашина ''Арома''', 678901)";
-                //sql = "INSERT INTO Purchases(Email, Name, Code) VALUES('maxim_kuznetsov@example.com', 'Посудомоечная машина ''Блестящая''', 789012)";
-                //sql = "INSERT INTO Purchases(Email, Name, Code) VALUES('alex_ivanov@example.com', 'Электрическая плита ''Гастроном''', 890123)";
-                //sql = "INSERT INTO Purchases(Email, Name, Code) VALUES('anna_petrova@example.com', 'Камин ''Теплая атмосфера''', 901234)";
-                //sql = "INSERT INTO Purchases(Email, Name, Code) VALUES('artem_sokolov@example.com', 'Увлажнитель воздуха ''Оазис''', 012345)";
-
-                //sql = @"INSERT INTO Purchases (Email, Name, Code) VALUES
-                //SELECT* FROM(SELECT 'ivan_vasilyev @example.com', 'Холодильник ''Морозко''',123456
-                //UNION ALL SELECT 'alex_ivanov @example.com', 'Стиральная машина ''Белоснежка''', 234567
-                //UNION ALL SELECT 'ekaterina_smirnova @example.com', 'Пылесос ''Чистый дом''', 345678
-                //UNION ALL SELECT 'maxim_kuznetsov @example.com', 'Микроволновая печь ''Мгновенный обед''', 456789); ";
-                #endregion
-
-                //sql = "Select * from Purchases";
-                //OleDbCommand command = new OleDbCommand(sql, oleConnection);
-
-                //oleConnection.Open();
-                //command.ExecuteNonQuery();
-                //MessageBox.Show(oleConnection.State.ToString());
-                //oleConnection.Close();
-
-                
                 oleDataAdapter.Fill(oleDataTable);
 
             }
@@ -149,21 +131,8 @@ namespace Homework16
 
                 MessageBox.Show(e.Message);
             }
-
-
             
-            //mySQLConnection = new SqlConnection(strBuilderConString.ConnectionString);
-
-            //sqlDataTable = new DataTable();
-            //sqlDA = new SqlDataAdapter();
-
-
-            //string sql = @"SELECT * FROM [Customerz] Order By [Email]";
-            //sqlDA.SelectCommand = new SqlCommand(sql, mySQLConnection);
-
-            //sqlDA.Fill(sqlDataTable);
-
-
+            
         }
         public void AccessUpdate()
         {
@@ -171,6 +140,22 @@ namespace Homework16
             {
 
                 oleDataAdapter.Update(oleDataTable);
+                
+
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+        }
+       
+        public void SqlUpdate()
+        {
+            try
+            {
+
+                sqlDA.Update(sqlDataTable);
 
 
             }
