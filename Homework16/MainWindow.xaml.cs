@@ -15,6 +15,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Homework16
+
+
+    ////// ЗАМЕНИТЬ ACESS НА ЧТО-ТО ДРУГОЕ!!!!
 {
     #region TODO
     //todo: Разработайте приложение, в котором будет подключено два разных источника данных: MSSQLLocalDB и MS Access.
@@ -101,31 +104,32 @@ namespace Homework16
     public partial class MainWindow : Window
     {
         DbConnector connector = new DbConnector();
+        DataRow customerDataRow;
         public MainWindow()
         {
             InitializeComponent();
+            customerDataRow = connector.sqlDataTable.NewRow();
 
 
-            
 
             if (connector.sqlDataTable!=null)
             {
-            dgSQL.ItemsSource = connector.sqlDataTable.DefaultView;
+            dgSQL.DataContext = connector.sqlDataTable.DefaultView;
             
             }
             if (connector.oleDataTable != null)
             {
-                dgAccess.ItemsSource = connector.oleDataTable.DefaultView;
+                dgAccess.DataContext = connector.oleDataTable.DefaultView;
 
             }
-            
 
+           // dgSQL.CurrentCellChanged += connector.SqlUpdate();
         }
 
         
         private void addCustomerBtnClick(object sender, RoutedEventArgs e)
         {
-            DataRow customerDataRow = connector.sqlDataTable.NewRow();
+            
             customerDataRow["LastName"]= "Булкин";
             customerDataRow["SurName"] = "Булкин";
             customerDataRow["FirstName"] = "Булкин";
@@ -156,10 +160,13 @@ namespace Homework16
                     purchaseDataRow["Email"] = customerDataRowView["Email"];
 
                     connector.oleDataTable.Rows.Add(purchaseDataRow); //Добавляет покупку в DataTable
-                    MessageBox.Show(purchaseDataRow["Id"].ToString());
+                    
                     connector.AccessUpdate();
-                    dgAccess.ItemsSource = connector.oleDataTable.DefaultView;
 
+                    connector.oleDataTable = new DataTable();
+                    connector.oleDataAdapter.Fill(connector.oleDataTable);
+
+                    dgAccess.ItemsSource = connector.oleDataTable.DefaultView;
 
                 }
             }
@@ -193,6 +200,18 @@ namespace Homework16
         private void MenuItemDeleteClick(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void UpdateCustomerBtnClick(object sender, RoutedEventArgs e)
+        {
+            customerDataRow["LastName"] = "Барыгин";
+            customerDataRow["SurName"] = "Иванович";
+            customerDataRow["FirstName"] = "Гарри";
+            customerDataRow["Phone"] = 134679;
+            customerDataRow["Email"] = "bariga@gmail.com";
+            connector.sqlDataTable.Rows.Add(customerDataRow);
+
+            connector.SqlUpdate();
         }
     }
 }
