@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Homework16"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="AddCustomerWindow" Height="400" Width="350">
+    
     
     <Grid>
         <Label Name="lblCustomerName" HorizontalAlignment="Center" Content="Данные о покупателе" Margin="10,10,10,0" VerticalAlignment="Top" Height="48"/>

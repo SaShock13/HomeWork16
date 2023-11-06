@@ -7,6 +7,7 @@
         
         mc:Ignorable="d"
         Title='Магазин бытовой техники "М-Аудио"' Height="800" Width="1600" 
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -25,8 +26,8 @@
             <ColumnDefinition Width="0.5*" />
         </Grid.ColumnDefinitions>
 
-        <DataGrid ToolTip="Правая кнопка мыши для контекстного меню" Name="dgSQL" Margin="10,50,10,10"
-                  
+        <DataGrid ToolTip="Список всех покупателей" Name="dgSQL" Margin="10,50,10,10"
+                  CanUserAddRows="False"
                   Grid.Column="0" Grid.Row="0"
                   IsSynchronizedWithCurrentItem="True"
                   SelectionMode="Single" 
@@ -65,17 +66,14 @@
                                     Header="Номер телефона"
                                     Width="95"/>
             </DataGrid.Columns>
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Добавить" Click="MenuItemAddClick"/>
-                    <MenuItem Header="Удалить" Click="MenuItemDeleteClick"/>
-                </ContextMenu>
-            </DataGrid.ContextMenu>
+            
 
 
         </DataGrid>
 
         <DataGrid Grid.Column="1" Grid.Row="0" Name="dgAccess" Margin="10,50,10,10"
+                  ToolTip="Список покупок покупателей" 
+                  CanUserAddRows="False"
                   IsSynchronizedWithCurrentItem="True"
                   IsReadOnly="True"
                   SelectionMode="Single" 

@@ -55,16 +55,12 @@ namespace Homework16
                      SET @id = @@IDENTITY;";
 
             sqlDA.InsertCommand = new SqlCommand(sql, mySQLConnection);
-
             sqlDA.InsertCommand.Parameters.Add("@id", SqlDbType.Int, 4, "id").Direction = ParameterDirection.Output;
             sqlDA.InsertCommand.Parameters.Add("@LastName", SqlDbType.NVarChar, 20, "LastName");
             sqlDA.InsertCommand.Parameters.Add("@FirstName", SqlDbType.NVarChar, 20, "FirstName");
             sqlDA.InsertCommand.Parameters.Add("@SurName", SqlDbType.NVarChar, 20, "SurName");
             sqlDA.InsertCommand.Parameters.Add("@Phone", SqlDbType.Int, 11, "Phone");
             sqlDA.InsertCommand.Parameters.Add("@Email", SqlDbType.NVarChar, 50, "Email");
-
-
-
 
             sql = @"UPDATE Customerz SET 
                            LastName = @LastName,
@@ -76,9 +72,7 @@ namespace Homework16
                     WHERE id = @id";
 
             sqlDA.UpdateCommand = new SqlCommand(sql, mySQLConnection);
-
             sqlDA.UpdateCommand.Parameters.Add("@id", SqlDbType.Int, 0, "id").SourceVersion = DataRowVersion.Original;
-
             sqlDA.UpdateCommand.Parameters.Add("@LastName", SqlDbType.NVarChar, 20, "LastName");
             sqlDA.UpdateCommand.Parameters.Add("@FirstName", SqlDbType.NVarChar, 20, "FirstName");
             sqlDA.UpdateCommand.Parameters.Add("@SurName", SqlDbType.NVarChar, 20, "SurName");
@@ -93,19 +87,11 @@ namespace Homework16
             try
             {
                 sqlDA.Fill(sqlDataTable);
-
-
             }
             catch (Exception e)
             {
-
                 MessageBox.Show(e.Message); 
             }
-
-
-            
-
-
         }
 
         private void AccessDBInitiation()
@@ -167,14 +153,10 @@ namespace Homework16
         {
             try
             {
-                
                 oleDataAdapter.Update(oleDataTable);
-                
-                    
             }
             catch (Exception e)
             {
-
                 MessageBox.Show(e.Message);
             }
         }
@@ -189,9 +171,6 @@ namespace Homework16
             oleDataTable.Rows.Clear();
             oleDataAdapter.Fill(oleDataTable);
 
-            //sql = "DELETE FROM Purchases WHERE Id = @id";
-            //oleDataAdapter.DeleteCommand = new OleDbCommand(sql, oleConnection);
-            //oleDataAdapter.DeleteCommand.Parameters.Add("@id", OleDbType.Integer, 4, "id");
         }
 
         public void ShowAllPurchases()
@@ -199,26 +178,18 @@ namespace Homework16
             string sql = $"select * from Purchases order by Id";
 
             oleDataAdapter.SelectCommand = new OleDbCommand(sql, oleConnection);
-           
             oleDataTable.Rows.Clear();
             oleDataAdapter.Fill(oleDataTable);
 
-            //sql = "DELETE FROM Purchases WHERE Id = @id";
-            //oleDataAdapter.DeleteCommand = new OleDbCommand(sql, oleConnection);
-            //oleDataAdapter.DeleteCommand.Parameters.Add("@id", OleDbType.Integer, 4, "id");
         }
         public void SqlUpdate()
         {
             try
             {
-
                 sqlDA.Update(sqlDataTable);
-
-
             }
             catch (Exception e)
             {
-
                 MessageBox.Show(e.Message);
             }
         }
@@ -236,10 +207,6 @@ namespace Homework16
             oleDataAdapter.Fill(oleDataTable);
 
         }
-        public void DeleteCustomer(int id)
-        {
-           
-        }
-
+       
     }
 }

@@ -17,9 +17,7 @@ using System.Windows.Shapes;
 namespace Homework16
 
 
-    //Пока подумаю! ---ЗАМЕНИТЬ ACESS НА ЧТО-ТО ДРУГОЕ----!!!!
-    // DataGrid имеен пустую строку в конце, как избавится от нее ?
-    // удалять покупки вместе с удалением покупателя!
+    
 {
     #region TODO
     //todo: Разработайте приложение, в котором будет подключено два разных источника данных: MSSQLLocalDB и MS Access.
@@ -52,52 +50,6 @@ namespace Homework16
     //После чего, используя запросы SQL и компоненты WPF, разработайте программу для сотрудников магазина.
     #endregion
 
-    #region Товары
-    //    Код: 123456, Название: Холодильник "Морозко"
-    //2. Код: 234567, Название: Стиральная машина "Белоснежка"
-    //3. Код: 345678, Название: Пылесос "Чистый дом"
-    //4. Код: 456789, Название: Микроволновая печь "Мгновенный обед"
-    //5. Код: 567890, Название: Телевизор "Кристалл"
-    //6. Код: 678901, Название: Кофемашина "Арома"
-    //7. Код: 789012, Название: Посудомоечная машина "Блестящая"
-    //8. Код: 890123, Название: Электрическая плита "Гастроном"
-    //9. Код: 901234, Название: Камин "Теплая атмосфера"
-    //10. Код: 012345, Название: Увлажнитель воздуха "Оазис"
-    //11. Код: 432109, Название: Фен "Стрижка ветра"
-    //12. Код: 543210, Название: Утюг "Гладкие складки"
-    //13. Код: 654321, Название: Кухонный комбайн "Все в одном"
-    //14. Код: 765432, Название: Блендер "Нежные коктейли"
-    //15. Код: 876543, Название: Мясорубка "Фарш мечты"
-    //16. Код: 987654, Название: Чайник "Электробур"
-    //17. Код: 098765, Название: Вакуумный упаковщик "Свежесть"
-    //18. Код: 109876, Название: Мультиварка "Кулинарные эксперименты"
-    //19. Код: 210987, Название: Барный холодильник "Ледяной вихрь"
-    //20. Код: 321098, Название: Швейная машинка "Творческий порыв"
-    #endregion
-    #region Покупатели
-    //1. Имя: Александр, Фамилия: Иванов, Отчество: Петрович, Телефон: +79123456789, Email: alex_ivanov @example.com
-    //2. Имя: Екатерина, Фамилия: Смирнова, Отчество: Алексеевна, Телефон: +79234567890, Email: ekaterina_smirnova @example.com
-    //3. Имя: Максим, Фамилия: Кузнецов, Отчество: Андреевич, Телефон: +79345678901, Email: maxim_kuznetsov @example.com
-    //4. Имя: Ольга, Фамилия: Попова, Отчество: Дмитриевна, Телефон: +79456789012, Email: olga_popova @example.com
-    //5. Имя: Иван, Фамилия: Васильев, Отчество: Егорович, Телефон: +79567890123, Email: ivan_vasilyev @example.com
-    //6. Имя: Анна, Фамилия: Петрова, Отчество: Александровна, Телефон: +79678901234, Email: anna_petrova @example.com
-    //7. Имя: Артем, Фамилия: Соколов, Отчество: Максимович, Телефон: +79789012345, Email: artem_sokolov @example.com
-    //8. Имя: Мария, Фамилия: Михайлова, Отчество: Егоровна, Телефон: +79890123456, Email: maria_mikhailova @example.com
-    //9. Имя: Андрей, Фамилия: Новиков, Отчество: Иванович, Телефон: +79901234567, Email: andrey_novikov @example.com
-    //10. Имя: Елена, Фамилия: Федорова, Отчество: Николаевна, Телефон: +70000000000, Email: elena_fedorova @example.com
-    //11. Имя: Дмитрий, Фамилия: Егоров, Отчество: Сергеевич, Телефон: +70111111111, Email: dmitry_egorov @example.com
-    //12. Имя: Светлана, Фамилия: Волкова, Отчество: Александровна, Телефон: +70222222222, Email: svetlana_volkova @example.com
-    //13. Имя: Павел, Фамилия: Козлов, Отчество: Никитич, Телефон: +70333333333, Email: pavel_kozlov @example.com
-    //14. Имя: Наталья, Фамилия: Лебедева, Отчество: Викторовна, Телефон: +70444444444, Email: natalya_lebedeva @example.com
-    //15. Имя: Алексей, Фамилия: Семенов, Отчество: Юрьевич, Телефон: +70555555555, Email: alexey_semenov @example.com
-    //16. Имя: Юлия, Фамилия: Ефимова, Отчество: Валентиновна, Телефон: +70666666666, Email: yuliya_efimova @example.com
-    //17. Имя: Владимир, Фамилия: Денисов, Отчество: Олегович, Телефон: +70777777777, Email: vladimir_denisov @example.com
-    //18. Имя: Евгения, Фамилия: Романова, Отчество: Владимировна, Телефон: +70888888888, Email: evgenia_romanova @example.com
-    //19. Имя: Роман, Фамилия: Зайцев, Отчество: Анатольевич, Телефон: +70999999999, Email: roman_zaitsev @example.com
-    //20. Имя: Людмила, Фамилия: Комарова, Отчество: Федоровна, Телефон: +71010101010, Email: lyudmila_komarova @example.com
-    #endregion
-
-
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
@@ -111,25 +63,15 @@ namespace Homework16
         {
             InitializeComponent();
             customerDataRow = connector.sqlDataTable.NewRow();
-
-
-
             if (connector.sqlDataTable!=null)
             {
-            dgSQL.DataContext = connector.sqlDataTable.DefaultView;
-            
+                dgSQL.DataContext = connector.sqlDataTable.DefaultView;
             }
             if (connector.oleDataTable != null)
             {
                 dgAccess.DataContext = connector.oleDataTable.DefaultView;
-
-
             }
-
-           
         }
-
-        
         private void addCustomerBtnClick(object sender, RoutedEventArgs e)
         {
             bool isExist = false;
@@ -153,44 +95,30 @@ namespace Homework16
                         break;
                     }
                 }
-
                 if (isExist == false)
                 {
                     connector.sqlDataTable.Rows.Add(customerDataRow);
-
                 }
-                
                 connector.SqlUpdate();
             }
-
-
         }
-
         private void AddPurchaseBtnClick(object sender, RoutedEventArgs e)
         {
-            
             DataRowView customerDataRowView;
             DataRow purchaseDataRow = connector.oleDataTable.NewRow();
             customerDataRowView = dgSQL.SelectedItem as DataRowView;
-            
             AddPurchaseWindow addPurchaseWindow = new AddPurchaseWindow(purchaseDataRow);
             if (dgSQL.SelectedIndex!=-1)
             {
                 addPurchaseWindow.ShowDialog();
-
-
                 if (addPurchaseWindow.DialogResult == true)
                 {
                     purchaseDataRow = addPurchaseWindow.purchaseRow;
                     purchaseDataRow["Email"] = customerDataRowView["Email"];
-
                     connector.oleDataTable.Rows.Add(purchaseDataRow); //Добавляет покупку в DataTable
-                    
                     connector.AccessUpdate();
-
                     connector.oleDataTable = new DataTable();
                     connector.oleDataAdapter.Fill(connector.oleDataTable);
-
                     dgAccess.ItemsSource = connector.oleDataTable.DefaultView;
 
                 }
@@ -199,9 +127,7 @@ namespace Homework16
 
         private void allPurchaseBtnClick(object sender, RoutedEventArgs e)
         {
-
             connector.ShowAllPurchases();
-
         }
 
         private void DelAllPurchaseBtnClick(object sender, RoutedEventArgs e)
@@ -225,17 +151,6 @@ namespace Homework16
             }
 
         }
-
-        private void MenuItemAddClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void MenuItemDeleteClick(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void UpdateCustomerBtnClick(object sender, RoutedEventArgs e)
         {
             if (dgSQL.SelectedIndex!=-1)
@@ -263,11 +178,7 @@ namespace Homework16
             {
                 dgSQL.SelectedIndex = 0;
             }
-            if (dgSQL.SelectedIndex == dgSQL.Items.Count-1)
-            {
-                
-                dataRowView = (DataRowView)dgSQL.Items[dgSQL.Items.Count - 2];
-            }else dataRowView = (DataRowView)dgSQL.SelectedItem;
+            dataRowView = (DataRowView)dgSQL.SelectedItem;
 
             
             connector.ShowPurchasesOfCustomer(dataRowView["Email"].ToString());
