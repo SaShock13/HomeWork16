@@ -17,7 +17,9 @@ using System.Windows.Shapes;
 namespace Homework16
 
 
-    ////// ЗАМЕНИТЬ ACESS НА ЧТО-ТО ДРУГОЕ!!!!
+    //Пока подумаю! ---ЗАМЕНИТЬ ACESS НА ЧТО-ТО ДРУГОЕ----!!!!
+    // DataGrid имеен пустую строку в конце, как избавится от нее ?
+    // удалять покупки вместе с удалением покупателя!
 {
     #region TODO
     //todo: Разработайте приложение, в котором будет подключено два разных источника данных: MSSQLLocalDB и MS Access.
@@ -121,23 +123,46 @@ namespace Homework16
             {
                 dgAccess.DataContext = connector.oleDataTable.DefaultView;
 
+
             }
 
-           // dgSQL.CurrentCellChanged += connector.SqlUpdate();
+           
         }
 
         
         private void addCustomerBtnClick(object sender, RoutedEventArgs e)
         {
-            
-            customerDataRow["LastName"]= "Булкин";
-            customerDataRow["SurName"] = "Булкин";
-            customerDataRow["FirstName"] = "Булкин";
-            customerDataRow["Phone"] = 134679;
-            customerDataRow["Email"] = "bulkin@gmail.com";
-            connector.sqlDataTable.Rows.Add(customerDataRow);
-            
-            connector.SqlUpdate();
+            bool isExist = false;
+            AddCustomerWindow addCustomerWindow = new AddCustomerWindow();
+            addCustomerWindow.ShowDialog();
+            if (addCustomerWindow.DialogResult == true)
+            {
+                customerDataRow = connector.sqlDataTable.NewRow();
+                customerDataRow["LastName"]= addCustomerWindow.tbLastName.Text;
+                customerDataRow["SurName"] = addCustomerWindow.tbFirstName.Text;
+                customerDataRow["FirstName"] = addCustomerWindow.tbSurName.Text;
+                customerDataRow["Phone"] = addCustomerWindow.tbPhone.Text;
+                customerDataRow["Email"] = addCustomerWindow.tbEmail.Text;
+
+                foreach (DataRow row in connector.sqlDataTable.Rows)
+                {
+                    if (row["Email"].ToString() == addCustomerWindow.tbEmail.Text)
+                    {
+                        MessageBox.Show("Такой email уже существует в базе!!!");
+                        isExist = true;
+                        break;
+                    }
+                }
+
+                if (isExist == false)
+                {
+                    connector.sqlDataTable.Rows.Add(customerDataRow);
+
+                }
+                
+                connector.SqlUpdate();
+            }
+
 
         }
 
@@ -175,20 +200,29 @@ namespace Homework16
         private void allPurchaseBtnClick(object sender, RoutedEventArgs e)
         {
 
+            connector.ShowAllPurchases();
+
         }
 
         private void DelAllPurchaseBtnClick(object sender, RoutedEventArgs e)
         {
+            if (dgSQL.SelectedIndex != -1)
+            {
+            connector.DeleteAllCustomersPurchases((dgSQL.SelectedItem as DataRowView)["Email"].ToString());
 
+            }
         }
 
         private void DelPurchaseBtnClick(object sender, RoutedEventArgs e)
         {
-            //connector.oleDataAdapter.DeleteCommand.ExecuteNonQuery();
-            DataRowView dataRowView;
-            dataRowView = (DataRowView)dgAccess.SelectedItem;
-            dataRowView.Row.Delete();
-            connector.AccessUpdate();
+
+            if (dgAccess.SelectedIndex != -1)
+            {
+                DataRowView dataRowView;
+                dataRowView = (DataRowView)dgAccess.SelectedItem;
+                dataRowView.Row.Delete();
+                connector.AccessUpdate(); 
+            }
 
         }
 
@@ -204,14 +238,53 @@ namespace Homework16
 
         private void UpdateCustomerBtnClick(object sender, RoutedEventArgs e)
         {
-            customerDataRow["LastName"] = "Барыгин";
-            customerDataRow["SurName"] = "Иванович";
-            customerDataRow["FirstName"] = "Гарри";
-            customerDataRow["Phone"] = 134679;
-            customerDataRow["Email"] = "bariga@gmail.com";
-            connector.sqlDataTable.Rows.Add(customerDataRow);
+            if (dgSQL.SelectedIndex!=-1)
+            {
+                customerDataRow = connector.sqlDataTable.NewRow();
+                customerDataRow = dgSQL.SelectedItem as DataRow;
+                DataRowView dataRow = (DataRowView)dgSQL.SelectedItem;
+                UpdateCustomerWindow updateCustomerWindow = new UpdateCustomerWindow(dataRow);
+                updateCustomerWindow.ShowDialog();
 
-            connector.SqlUpdate();
+                dataRow["LastName"] = updateCustomerWindow.tbLastName.Text;
+                dataRow["SurName"] = updateCustomerWindow.tbSurName.Text;
+                dataRow["FirstName"] = updateCustomerWindow.tbFirstName.Text;
+                dataRow["Phone"] = updateCustomerWindow.tbPhone.Text;
+                dataRow["Email"] = updateCustomerWindow.tbEmail.Text;
+
+                connector.SqlUpdate(); 
+            }
+        }
+
+        private void dgSQL_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataRowView dataRowView;
+            if (dgSQL.SelectedIndex == -1 )
+            {
+                dgSQL.SelectedIndex = 0;
+            }
+            if (dgSQL.SelectedIndex == dgSQL.Items.Count-1)
+            {
+                
+                dataRowView = (DataRowView)dgSQL.Items[dgSQL.Items.Count - 2];
+            }else dataRowView = (DataRowView)dgSQL.SelectedItem;
+
+            
+            connector.ShowPurchasesOfCustomer(dataRowView["Email"].ToString());
+            dgAccess.SelectedIndex = 0;
+        }
+
+        private void DelCustomerBtnClick(object sender, RoutedEventArgs e)
+        {
+            if (dgSQL.SelectedIndex!=-1)
+            {
+                DataRowView dataRowView = (DataRowView)dgSQL.SelectedItem;
+                connector.DeleteAllCustomersPurchases((dgSQL.SelectedItem as DataRowView)["Email"].ToString());
+                dataRowView.Row.Delete();
+                dgSQL.SelectedIndex = 0;
+                connector.SqlUpdate(); 
+            }
+            
         }
     }
 }

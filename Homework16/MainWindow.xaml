@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Homework16"
         
         mc:Ignorable="d"
-        Title='Магазин бытовой техники "М-Аудио"' Height="800" Width="1400" 
+        Title='Магазин бытовой техники "М-Аудио"' Height="800" Width="1600" 
         ResizeMode="NoResize"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
      TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -17,23 +17,12 @@
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}">
 
-
-
-    <!--<Grid>
-        <materialDesign:Card Padding="32" Margin="16">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">My First Material Design App</TextBlock>
-        </materialDesign:Card>
-    </Grid>-->
-
-
-
-
     <Grid   >
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="0.65*" />
+            <ColumnDefinition Width="0.8*" />
+            <ColumnDefinition Width="0.5*" />
         </Grid.ColumnDefinitions>
 
         <DataGrid ToolTip="Правая кнопка мыши для контекстного меню" Name="dgSQL" Margin="10,50,10,10"
@@ -43,7 +32,7 @@
                   SelectionMode="Single" 
                   AutoGenerateColumns="False" 
                   ItemsSource="{Binding}"
-                  IsReadOnly="False" 
+                  IsReadOnly="False" SelectionChanged="dgSQL_SelectionChanged" 
                   
                   
                   >
@@ -74,7 +63,7 @@
                 <DataGridTextColumn x:Name="phone" 
                                     Binding="{Binding Phone}" 
                                     Header="Номер телефона"
-                                    Width="150"/>
+                                    Width="95"/>
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -102,29 +91,30 @@
                 <DataGridTextColumn x:Name="emailProduct" 
                                     Binding="{Binding Email}" 
                                     Header="E-mail покупателя"
-                                    Width="200"/>
+                                    Width="170"/>
 
                 <DataGridTextColumn x:Name="productCode" 
                                     Binding="{Binding Code}" 
                                     Header="Код товара"
-                                    Width="65"/>
+                                    Width="100"/>
 
                 <DataGridTextColumn x:Name="productName" 
                                     Binding="{Binding Name}" 
                                     Header="Наименование товара"
-                                    Width="200"/>
+                                    Width="150"/>
 
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="2" Grid.Row="0" Content="Добавить покупку" Margin="0,313,0,0" VerticalAlignment="Top" Width="270" Height="32" Click="AddPurchaseBtnClick" HorizontalAlignment="Center"/>
-        <Button Grid.Column="2" Grid.Row="0" Content="Удалить покупку" HorizontalAlignment="Center" Margin="0,392,0,0" VerticalAlignment="Top"  Height="32" Width="270" Click="DelPurchaseBtnClick"/>
-        <Button Grid.Column="2" Grid.Row="0" Content="Удалить все покупки покупателя" HorizontalAlignment="Center" Margin="0,508,0,0" VerticalAlignment="Top" Height="32" Width="270" Click="DelAllPurchaseBtnClick"/>
-        <Button Grid.Column="2" Grid.Row="0" Name="btnAddCustomer" Content="Добавить покупателя" Margin="0,613,0,0" VerticalAlignment="Top" Width="270" Height="32" Click="addCustomerBtnClick" HorizontalAlignment="Center"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Добавить покупку" Margin="0,227,0,0" VerticalAlignment="Top" Width="270" Height="32" Click="AddPurchaseBtnClick" HorizontalAlignment="Center"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Удалить покупку" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top"  Height="32" Width="270" Click="DelPurchaseBtnClick"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Удалить все покупки покупателя" HorizontalAlignment="Center" Margin="0,338,0,0" VerticalAlignment="Top" Height="32" Width="270" Click="DelAllPurchaseBtnClick"/>
+        <Button Grid.Column="2" Grid.Row="0" Name="btnAddCustomer" Content="Добавить покупателя" Margin="0,392,0,0" VerticalAlignment="Top" Width="270" Height="32" Click="addCustomerBtnClick" HorizontalAlignment="Center"/>
         <Button Grid.Column="2" Content="Посмотреть покупки всех клиентов" HorizontalAlignment="Center" Width="270" Click="allPurchaseBtnClick" Margin="0,0,0,40" Height="32" VerticalAlignment="Bottom" />
         <TextBlock Grid.Column="2"  Name="tbInfo" HorizontalAlignment="Center" Margin="0,61,0,562" TextWrapping="Wrap" TextAlignment="Center" Text="Поле для вывода ошибок." Width="270"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0"  TextWrapping="Wrap" Text="Клиенты" FontSize="15" FontWeight="Bold" VerticalAlignment="Top" />
         <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="Покупки" FontSize="15" FontWeight="Bold" VerticalAlignment="Top"  Grid.Column="1"/>
-        <Button Grid.Column="2" Grid.Row="0" x:Name="btnUpdateCustomer" Content="Изменить покупателя" Margin="0,650,0,0" VerticalAlignment="Top" Width="270" Height="32" Click="UpdateCustomerBtnClick" HorizontalAlignment="Center"/>
+        <Button Grid.Column="2" Grid.Row="0" x:Name="btnUpdateCustomer" Content="Изменить покупателя" Margin="0,449,0,0" VerticalAlignment="Top" Width="270" Height="32" Click="UpdateCustomerBtnClick" HorizontalAlignment="Center"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Удалить покупателя" HorizontalAlignment="Center" Margin="0,501,0,0" VerticalAlignment="Top"  Height="32" Width="270" Click="DelCustomerBtnClick"/>
 
 
     </Grid>

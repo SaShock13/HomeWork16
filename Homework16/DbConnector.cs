@@ -16,12 +16,13 @@ namespace Homework16
     internal class DbConnector
     {
         SqlConnection mySQLConnection;
+        OleDbConnection oleConnection;
         SqlDataAdapter sqlDA;
         public OleDbDataAdapter oleDataAdapter;
         public DataTable sqlDataTable;
         public DataTable oleDataTable;
 
-        //DataRowView dataRowView;
+        
         public DbConnector()
         {
             MSSQLInitiation();
@@ -119,12 +120,13 @@ namespace Homework16
                 DataSource = @"C:\Skillbox\MyHomeworks\Homework16\Homework16\Homework16AccessDB.accdb"
             };
             oleStrBuilder.Add("Jet OLEDB:Database Password","123456");
-            var oleConnection = new OleDbConnection(oleStrBuilder.ConnectionString);
+            oleConnection = new OleDbConnection(oleStrBuilder.ConnectionString);
 
             var sql = "";
 
             sql = "select * from Purchases";
             oleDataAdapter.SelectCommand = new OleDbCommand(sql, oleConnection);
+
 
             sql = "DELETE FROM Purchases WHERE Id = @id";
             oleDataAdapter.DeleteCommand = new OleDbCommand(sql, oleConnection);
@@ -176,7 +178,35 @@ namespace Homework16
                 MessageBox.Show(e.Message);
             }
         }
-       
+
+        public void ShowPurchasesOfCustomer(string email)
+        {
+            string sql = $"select * from Purchases where Email = @email";
+
+            oleDataAdapter.SelectCommand = new OleDbCommand(sql, oleConnection);
+            OleDbParameter parameter = new OleDbParameter("@email", email);
+            oleDataAdapter.SelectCommand.Parameters.Add(parameter);
+            oleDataTable.Rows.Clear();
+            oleDataAdapter.Fill(oleDataTable);
+
+            //sql = "DELETE FROM Purchases WHERE Id = @id";
+            //oleDataAdapter.DeleteCommand = new OleDbCommand(sql, oleConnection);
+            //oleDataAdapter.DeleteCommand.Parameters.Add("@id", OleDbType.Integer, 4, "id");
+        }
+
+        public void ShowAllPurchases()
+        {
+            string sql = $"select * from Purchases order by Id";
+
+            oleDataAdapter.SelectCommand = new OleDbCommand(sql, oleConnection);
+           
+            oleDataTable.Rows.Clear();
+            oleDataAdapter.Fill(oleDataTable);
+
+            //sql = "DELETE FROM Purchases WHERE Id = @id";
+            //oleDataAdapter.DeleteCommand = new OleDbCommand(sql, oleConnection);
+            //oleDataAdapter.DeleteCommand.Parameters.Add("@id", OleDbType.Integer, 4, "id");
+        }
         public void SqlUpdate()
         {
             try
@@ -192,5 +222,24 @@ namespace Homework16
                 MessageBox.Show(e.Message);
             }
         }
+
+        internal void DeleteAllCustomersPurchases(string email)
+        {
+            string sql = "delete * from Purchases where Email = @email";
+            OleDbCommand delAllCommand = new OleDbCommand(sql,oleConnection);
+            OleDbParameter emailParameter = new OleDbParameter("email", email);
+            delAllCommand.Parameters.Add(emailParameter);
+            oleConnection.Open();
+            delAllCommand.ExecuteNonQuery();
+            oleConnection.Close();
+            oleDataTable.Rows.Clear();
+            oleDataAdapter.Fill(oleDataTable);
+
+        }
+        public void DeleteCustomer(int id)
+        {
+           
+        }
+
     }
 }
